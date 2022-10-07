@@ -20,3 +20,7 @@ export const createUser = (user: UserInterface) => {
 export const deleteUserDB = async (id: string) => {
   await UserModel.findByIdAndDelete(id);
 };
+
+export const getUserById = async (id: string) => {
+  return await UserModel.findById(id);
+};

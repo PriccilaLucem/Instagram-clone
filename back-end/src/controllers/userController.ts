@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { UserInterface } from "../types";
+import { getUserById } from "../services/userServices";
+
 import {
   createUser,
   deleteUserDB,
@@ -17,7 +19,8 @@ export const postUser = async (req: Request, res: Response) => {
 };
 
 export const getOneUser = async (req: Request, res: Response) => {
-  const user = req.existentData;
+  const id = req.params.id;
+  const user = await getUserById(id);
   return res.json(user);
 };
 
