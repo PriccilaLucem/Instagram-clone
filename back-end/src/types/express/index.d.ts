@@ -1,3 +1,5 @@
+import { jwtDecodedUserInterface } from "..";
+
 export {};
 
 declare global {
@@ -5,6 +7,7 @@ declare global {
     interface Request {
       validatedData?: any;
       existentData?: any;
+      jwtDecodedUser?: jwtDecodedUserInterface;
     }
   }
 }
