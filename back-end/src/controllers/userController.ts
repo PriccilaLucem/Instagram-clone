@@ -23,6 +23,11 @@ export const getOneUser = async (req: Request, res: Response) => {
   const user = await getUserById(id);
   return res.json(user);
 };
+export const getYourProfile = async (req: Request, res: Response) => {
+  const id = req.jwtDecodedUser?._id as string;
+  const user = await getUserById(id);
+  return res.json(user);
+};
 
 export const deleteUser = async (req: Request, res: Response) => {
   deleteUserDB(req.params.id);
