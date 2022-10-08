@@ -2,9 +2,11 @@ import { Router } from "express";
 import {
   deleteUser,
   getOneUser,
+  getYourProfile,
   postUser,
 } from "../controllers/userController";
 import {
+  isLogged,
   verifyIfEmailExists,
   verifyIfUserExists,
 } from "../middlewares/userMiddleware";
@@ -16,6 +18,7 @@ const router = Router();
 const UserRoutes = () => {
   router.post("", validateData(userSchema), verifyIfEmailExists, postUser);
   router.get("/:id", verifyIfUserExists, getOneUser);
+  router.get("", isLogged, getYourProfile);
   router.delete("/:id", verifyIfUserExists, deleteUser);
   return router;
 };
