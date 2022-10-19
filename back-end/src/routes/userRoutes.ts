@@ -1,6 +1,8 @@
 import { Router } from "express";
 import {
+  deleteAllUsers,
   deleteUser,
+  getAllUsers,
   getOneUser,
   getYourProfile,
   postUser,
@@ -18,8 +20,10 @@ const router = Router();
 const UserRoutes = () => {
   router.post("", validateData(userSchema), verifyIfEmailExists, postUser);
   router.get("/:id", verifyIfUserExists, getOneUser);
-  router.get("", isLogged, getYourProfile);
   router.delete("/:id", verifyIfUserExists, deleteUser);
+  // Dev routes
+  router.get("", getAllUsers);
+  router.delete("", deleteAllUsers);
   return router;
 };
 

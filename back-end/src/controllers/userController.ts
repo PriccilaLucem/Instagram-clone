@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { UserInterface } from "../types";
-import { getUserById } from "../services/userServices";
-
+import { getAll, getUserById } from "../services/userServices";
+import mongoose from "mongoose";
 import {
   createUser,
   deleteUserDB,
@@ -15,7 +15,15 @@ export const postUser = async (req: Request, res: Response) => {
   validatedData.hash = hash;
 
   const user = createUser(validatedData);
-  return res.status(201).json(user);
+  const output = {
+    _id: user._id,
+    username: user.username,
+    email: user.email,
+    followers: user.followers,
+    posts: user.posts,
+  };
+
+  return res.status(201).json(output);
 };
 
 export const getOneUser = async (req: Request, res: Response) => {
@@ -32,4 +40,24 @@ export const getYourProfile = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   deleteUserDB(req.params.id);
   return res.sendStatus(204);
+};
+
+// Function to clear all db
+export const deleteAllUsers = async (req: Request, res: Response) => {
+  async function clearCollections() {
+    const collections = mongoose.connection.collections;
+
+    await Promise.all(
+      Object.values(collections).map(async (collection) => {
+        await collection.deleteMany({}); // an empty mongodb selector object ({}) must be passed as the filter argument
+      })
+    );
+  }
+  await clearCollections();
+  return res.sendStatus(204);
+};
+
+export const getAllUsers = async (req: Request, res: Response) => {
+  const users = await getAll();
+  return res.json(users);
 };

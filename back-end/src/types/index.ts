@@ -5,6 +5,10 @@ export interface PostInterface {
   publication_date?: Date;
 }
 
+export interface FollowerInterface {
+  followerId: string;
+}
+
 export interface UserInterface {
   username: string;
   email: string;
@@ -12,6 +16,7 @@ export interface UserInterface {
   password?: string;
   _id: string;
   post: Array<PostInterface>;
+  followers: Array<FollowerInterface>;
 }
 
 export interface LoginInterface {
