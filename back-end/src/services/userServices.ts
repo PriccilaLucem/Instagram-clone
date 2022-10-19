@@ -24,3 +24,9 @@ export const deleteUserDB = async (id: string) => {
 export const getUserById = async (id: string) => {
   return await UserModel.findById(id);
 };
+
+export const getAll = async () => {
+  const users = await UserModel.find({}).select("-posts");
+
+  return users;
+};
