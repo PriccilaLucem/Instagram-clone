@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import FollowersSchema from "./followers";
+import FollowingSchema from "./following";
 import postSchema from "./post";
 
 const UserSchema = new Schema({
@@ -8,6 +9,7 @@ const UserSchema = new Schema({
   hash: { type: String, required: true, max: 150, select: false },
   posts: [postSchema],
   followers: [FollowersSchema],
+  following: [FollowingSchema],
 });
 
 const UserModel = mongoose.model("users", UserSchema);
