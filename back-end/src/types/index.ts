@@ -8,7 +8,9 @@ export interface PostInterface {
 export interface FollowerInterface {
   followerId: string;
 }
-
+export interface FollowingInterface {
+  followingUserId: string;
+}
 export interface UserInterface {
   username: string;
   email: string;
@@ -17,6 +19,7 @@ export interface UserInterface {
   _id: string;
   post: Array<PostInterface>;
   followers: Array<FollowerInterface>;
+  following: Array<FollowingInterface>;
 }
 
 export interface LoginInterface {
