@@ -1,4 +1,5 @@
 export interface PostInterface {
+  authorId: string;
   description: string;
   contentType: string;
   data: Buffer;
@@ -17,7 +18,6 @@ export interface UserInterface {
   hash: string;
   password?: string;
   _id: string;
-  post: Array<PostInterface>;
   followers: Array<FollowerInterface>;
   following: Array<FollowingInterface>;
 }
