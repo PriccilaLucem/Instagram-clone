@@ -20,7 +20,6 @@ export const postUser = async (req: Request, res: Response) => {
     username: user.username,
     email: user.email,
     followers: user.followers,
-    posts: user.posts,
   };
 
   return res.status(201).json(output);
